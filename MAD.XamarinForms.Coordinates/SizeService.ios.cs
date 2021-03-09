@@ -5,9 +5,11 @@ using Xamarin.Forms;
 
 namespace MAD.XamarinForms.Coordinates
 {
-    public partial class CoordinateService
+    public partial class SizeService
     {
-        Point ConvertPointToView_Native(Element receiver, Point point, Element view)
+
+
+        Size GetSize_Native(Element element)
         {
             throw new NotImplementedException();
         }

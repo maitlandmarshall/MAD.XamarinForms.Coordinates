@@ -7,7 +7,7 @@ namespace MAD.XamarinForms.Coordinates
 {
     public partial class CoordinateService : ICoordinateService
     {
-        public Point ConvertPointToView(VisualElement receiver, Point point, VisualElement view)
+        public Point ConvertPointToView(Element receiver, Point point, Element view)
         {
             return this.ConvertPointToView_Native(receiver, point, view);
         }

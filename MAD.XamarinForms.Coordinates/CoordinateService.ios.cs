@@ -7,7 +7,7 @@ namespace MAD.XamarinForms.Coordinates
 {
     public partial class CoordinateService
     {
-        Point ConvertPointToView_Native(VisualElement receiver, Point point, VisualElement view)
+        Point ConvertPointToView_Native(Element receiver, Point point, Element view)
         {
             throw new NotImplementedException();
         }

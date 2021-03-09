@@ -27,6 +27,9 @@ namespace MAD.XamarinForms.Coordinates.TestApp
             await Task.Delay(10);
 
             var coordinateService = new CoordinateService();
+            
+
+            
 
             var topLeftPoint = coordinateService.ConvertPointToView(this.tpLeft, Point.Zero, this.abs);
             var topRightPoint = coordinateService.ConvertPointToView(this.tpRight, Point.Zero, this.abs);
@@ -35,6 +38,12 @@ namespace MAD.XamarinForms.Coordinates.TestApp
             var bottomLeftPoint = coordinateService.ConvertPointToView(this.btmLeft, Point.Zero, this.abs);
 
             Debug.WriteLine(bottomRightPoint);
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            var sizeService = new SizeService();
+            var bounds = sizeService.GetSize(this.tbHi);
         }
     }
 }

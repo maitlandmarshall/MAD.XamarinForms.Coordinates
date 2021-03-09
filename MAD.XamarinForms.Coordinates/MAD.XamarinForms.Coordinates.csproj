@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;xamarinios10;monoandroid10.0;</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.16299;</TargetFrameworks>
     <Product>MAD.XamarinForms.Coordinates</Product>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>Maitland Marshall</Authors>
     <Company>MAIT DEV</Company>

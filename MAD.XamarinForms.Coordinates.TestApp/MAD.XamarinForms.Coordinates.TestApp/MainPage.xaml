@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAD.XamarinForms.Coordinates.TestApp.MainPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Hi" x:Name="tbHi" />
+    </ContentPage.ToolbarItems>
+
     <AbsoluteLayout x:Name="abs">
         <AbsoluteLayout.Resources>
             <Style TargetType="Label">
@@ -10,7 +14,10 @@
                         Value="Red" />
             </Style>
         </AbsoluteLayout.Resources>
-        
+
+        <Button Clicked="Button_Clicked"
+                Text="Find toolbar coords" />
+
         <Label Text="Top left"
                AbsoluteLayout.LayoutBounds="0, 0, 100, 100"
                AbsoluteLayout.LayoutFlags="PositionProportional" 

@@ -9,12 +9,12 @@ namespace MAD.XamarinForms.Coordinates
 {
     public partial class CoordinateService
     {
-        Point ConvertPointToView_Native(VisualElement receiver, Point point, VisualElement view)
+        Point ConvertPointToView_Native(Element receiver, Point point, Element view)
         {
-            var receiverRenderer = receiver.GetOrCreateRenderer();
-            var viewRenderer = view.GetOrCreateRenderer();
+            var receiverNative = receiver.GetNativeElement();
+            var viewNative = view.GetNativeElement();
 
-            var transform = receiverRenderer.ContainerElement.TransformToVisual(viewRenderer.ContainerElement);
+            var transform = receiverNative.TransformToVisual(viewNative);
             var nativePoint = transform.TransformPoint(new Windows.Foundation.Point(point.X, point.Y));
 
             return new Point(nativePoint.X, nativePoint.Y);

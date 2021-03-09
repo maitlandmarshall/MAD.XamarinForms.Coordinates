@@ -5,6 +5,6 @@ namespace MAD.XamarinForms.Coordinates
 {
     public interface ICoordinateService
     {
-        Point ConvertPointToView(VisualElement receiver, Point point, VisualElement view);
+        Point ConvertPointToView(Element receiver, Point point, Element view);
     }
 }
