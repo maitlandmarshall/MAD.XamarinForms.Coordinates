@@ -10,7 +10,7 @@ using Xamarin.Forms.Platform.UWP;
 
 namespace MAD.XamarinForms.Coordinates
 {
-    public static class ElementExtensions
+    public static partial class ElementExtensions
     {
         public static UIElement GetNativeElement(this Element element)
         {
@@ -37,17 +37,17 @@ namespace MAD.XamarinForms.Coordinates
             if (parent is null)
             {
                 // Assume all ToolbarItems must be within a page
-                var page = toolbarItem.Parent as Xamarin.Forms.Page;
+                var xamarinParent = toolbarItem.Parent;
 
-                // Get the renderer
-                var nativePage = page.GetOrCreateRenderer().ContainerElement;
-
-                // Go through the parents until you find a native control
+                // Go through the parents until you find valid Xamarin root
                 do
                 {
-                    parent = nativePage.Parent;
+                    xamarinParent = xamarinParent.Parent;
                 } 
-                while (parent is IVisualElementRenderer);
+                while (xamarinParent is IPageContainer<Xamarin.Forms.Page> == false);
+
+                var pageContainer = xamarinParent as VisualElement;
+                parent = pageContainer.GetOrCreateRenderer().ContainerElement;
             }
             
             var childrenCount = VisualTreeHelper.GetChildrenCount(parent);
@@ -68,6 +68,11 @@ namespace MAD.XamarinForms.Coordinates
                             return frameworkElement;
                         }
                     }
+                }
+                if (child is ShellToolbarItemRenderer shellToolbarItemRenderer
+                    && shellToolbarItemRenderer.ToolbarItem == toolbarItem)
+                {
+                    return shellToolbarItemRenderer;
                 }
                 else
                 {

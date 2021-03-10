@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;xamarinios10;monoandroid10.0;</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.16299;</TargetFrameworks>
     <Product>MAD.XamarinForms.Coordinates</Product>
-    <Version>0.0.3</Version>
+    <Version>0.0.5</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>Maitland Marshall</Authors>
     <Company>MAIT DEV</Company>
@@ -12,18 +12,12 @@
     <PackageProjectUrl>https://github.com/maitlandmarshall/MAD.XamarinForms.Coordinates</PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>
     <RepositoryType></RepositoryType>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="**\*.netstandard.cs" />
-    <None Include="**\*.ios.cs" />
-    <None Include="**\*.droid.cs" />
-    <None Include="**\*.uap.cs" />
-
-    <Compile Remove="**\*.netstandard.cs" />
-    <Compile Remove="**\*.ios.cs" />
-    <Compile Remove="**\*.droid.cs" />
-    <Compile Remove="**\*.uap.cs" />
+    <Compile Include="**\*.shared.cs" />
+    <Compile Include="**\*.shared.*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
@@ -39,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.12" />
 
     <Compile Include="**\*.uap.cs" />
   </ItemGroup>

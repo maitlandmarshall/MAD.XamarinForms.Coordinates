@@ -43,7 +43,9 @@ namespace MAD.XamarinForms.Coordinates.TestApp
         private void Button_Clicked(object sender, EventArgs e)
         {
             var sizeService = new SizeService();
+            var coordinateService = new CoordinateService();
             var bounds = sizeService.GetSize(this.tbHi);
+            var coords = coordinateService.ConvertPointToView(this.tbHi, Point.Zero, this);
         }
     }
 }
