@@ -36,18 +36,8 @@ namespace MAD.XamarinForms.Coordinates
         {
             if (parent is null)
             {
-                // Assume all ToolbarItems must be within a page
-                var xamarinParent = toolbarItem.Parent;
-
-                // Go through the parents until you find valid Xamarin root
-                do
-                {
-                    xamarinParent = xamarinParent.Parent;
-                } 
-                while (xamarinParent is IPageContainer<Xamarin.Forms.Page> == false);
-
-                var pageContainer = xamarinParent as VisualElement;
-                parent = pageContainer.GetOrCreateRenderer().ContainerElement;
+                var pageContainer = toolbarItem.GetPageContainer();
+                parent = (pageContainer as VisualElement).GetOrCreateRenderer().ContainerElement;
             }
             
             var childrenCount = VisualTreeHelper.GetChildrenCount(parent);

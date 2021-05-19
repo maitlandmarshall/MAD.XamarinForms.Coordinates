@@ -123,11 +123,15 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1931" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\MAD.XamarinForms.Coordinates\MAD.XamarinForms.Coordinates.csproj">
+      <Project>{2e993cc5-d814-4c71-b9b9-68715940e7f8}</Project>
+      <Name>MAD.XamarinForms.Coordinates</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MAD.XamarinForms.Coordinates.TestApp\MAD.XamarinForms.Coordinates.TestApp.csproj">
       <Project>{12D60C1D-A1AA-45EF-9A1E-213A96B36DAC}</Project>
       <Name>MAD.XamarinForms.Coordinates.TestApp</Name>

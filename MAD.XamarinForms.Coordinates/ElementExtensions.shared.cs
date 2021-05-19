@@ -20,5 +20,20 @@ namespace MAD.XamarinForms.Coordinates
 
             return coordinates;
         }
+
+        internal static IPageContainer<Page> GetPageContainer(this Element element)
+        {
+            // Assume all ToolbarItems must be within a page
+            var xamarinParent = element;
+
+            // Go through the parents until you find valid Xamarin root
+            do
+            {
+                xamarinParent = xamarinParent.Parent;
+            }
+            while (xamarinParent is IPageContainer<Xamarin.Forms.Page> == false);
+
+            return xamarinParent as IPageContainer<Page>;
+        }
     }
 }
