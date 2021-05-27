@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 namespace MAD.XamarinForms.Coordinates
 {
@@ -19,7 +20,7 @@ namespace MAD.XamarinForms.Coordinates
             var width = nativeView.MeasuredWidth;
             var height = nativeView.MeasuredHeight;
 
-            return new Xamarin.Forms.Size(width, height);
+            return new Xamarin.Forms.Size(nativeView.Context.FromPixels(width), nativeView.Context.FromPixels(height));
         }
     }
 }

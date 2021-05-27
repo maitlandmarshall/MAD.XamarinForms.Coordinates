@@ -1,18 +1,15 @@
-﻿using Android.Content;
-using Android.Views;
+﻿using Android.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Xamarin.Forms.Platform.Android.AppCompat;
 
 namespace MAD.XamarinForms.Coordinates
 {
     public static partial class ElementExtensions
     {
-        public static Android.Views.View GetNativeView(this Element element)
+        internal static Android.Views.View GetNativeView(this Element element)
         {
             Android.Views.View nativeView;
 
@@ -36,10 +33,9 @@ namespace MAD.XamarinForms.Coordinates
         private static Android.Views.View GetNativeToolbarItemView (ToolbarItem toolbarItem)
         {
             var toolbarItemParent = toolbarItem.Parent as Page;
-            var pageContainer = toolbarItem.GetPageContainer();
-            var pageContainerRenderer = Platform.GetRenderer(pageContainer as VisualElement);
+            var parentRenderer = Platform.GetRenderer(toolbarItemParent);
 
-            var androidContext = pageContainerRenderer.View.Context;
+            var androidContext = parentRenderer.View.Context;
             var fragmentManager = androidContext.GetFragmentManager();
             var fragments = fragmentManager.Fragments;
 
@@ -49,41 +45,37 @@ namespace MAD.XamarinForms.Coordinates
                 {                    
                     var shellItem = shellItemRenderer.ShellItemController as ShellItem;
                     var shellSection = shellItem.CurrentItem;
-                    var shellContent = shellSection.CurrentItem;
-                    var page = shellContent.Content;
+                    var shellContent = shellSection.CurrentItem as IShellContentController;
 
-                    if (page == toolbarItemParent)
+                    var shellSectionRenderer = GetPrivateFieldValue<IShellObservableFragment>(shellItemRenderer, "_currentFragment");
+                    var toolbarTracker = GetPrivateFieldValue<ShellToolbarTracker>(shellSectionRenderer, "_toolbarTracker");
+                    var currentMenuItems = GetPrivateFieldValue<IList<IMenuItem>>(toolbarTracker, "_currentMenuItems");
+                    var currentToolbarItems = GetPrivateFieldValue<IList<ToolbarItem>>(toolbarTracker, "_currentToolbarItems");
+
+                    var toolbarItemIdx = currentToolbarItems.IndexOf(toolbarItem);
+                    var menuItem = currentMenuItems.ElementAt(toolbarItemIdx);
+
+                    var toolbar = GetPrivateFieldValue<AndroidX.AppCompat.Widget.Toolbar>(toolbarTracker, "_toolbar");
+                    var toolbarChildCount = toolbar.ChildCount;
+
+                    for (int i = 0; i < toolbarChildCount; i++)
                     {
-                        var shellSectionRenderer = GetPrivateFieldValue<ShellSectionRenderer>(shellItemRenderer, "_currentFragment");
-                        var toolbarTracker = GetPrivateFieldValue<ShellToolbarTracker>(shellSectionRenderer, "_toolbarTracker");
-                        var currentMenuItems = GetPrivateFieldValue<IList<IMenuItem>>(toolbarTracker, "_currentMenuItems");
-                        var currentToolbarItems = GetPrivateFieldValue<IList<ToolbarItem>>(toolbarTracker, "_currentToolbarItems");
+                        var toolbarChild = toolbar.GetChildAt(i);
 
-                        var toolbarItemIdx = currentToolbarItems.IndexOf(toolbarItem);
-                        var menuItem = currentMenuItems.ElementAt(toolbarItemIdx);
-
-                        var toolbar = GetPrivateFieldValue<AndroidX.AppCompat.Widget.Toolbar>(toolbarTracker, "_toolbar");
-                        var toolbarChildCount = toolbar.ChildCount;
-
-                        for (int i = 0; i < toolbarChildCount; i++)
+                        if (toolbarChild is AndroidX.AppCompat.Widget.ActionMenuView actionMenuView)
                         {
-                            var toolbarChild = toolbar.GetChildAt(i);
+                            var actionMenuChildCount = actionMenuView.ChildCount;
 
-                            if (toolbarChild is AndroidX.AppCompat.Widget.ActionMenuView actionMenuView)
+                            for (int x = 0; x < actionMenuChildCount; x++)
                             {
-                                var actionMenuChildCount = actionMenuView.ChildCount;
+                                var actionMenuChild = actionMenuView.GetChildAt(x);
 
-                                for (int x = 0; x < actionMenuChildCount; x++)
+                                if (actionMenuChild.Id == menuItem.ItemId)
                                 {
-                                    var actionMenuChild = actionMenuView.GetChildAt(x);
-
-                                    if (actionMenuChild.Id == menuItem.ItemId)
-                                    {
-                                        return actionMenuChild;
-                                    }
+                                    return actionMenuChild;
                                 }
-
                             }
+
                         }
                     }
                 }

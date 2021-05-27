@@ -12,7 +12,7 @@ namespace MAD.XamarinForms.Coordinates
 {
     public static partial class ElementExtensions
     {
-        public static UIElement GetNativeElement(this Element element)
+        internal static UIElement GetNativeElement(this Element element)
         {
             UIElement nativeElement;
 
