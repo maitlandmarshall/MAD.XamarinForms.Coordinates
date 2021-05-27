@@ -23,6 +23,7 @@
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+	<IntermediateOutputPath>C:\Playground\XAMCoordsTestApp</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,6 +88,10 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MAD.XamarinForms.Coordinates\MAD.XamarinForms.Coordinates.csproj">
+      <Project>{2e993cc5-d814-4c71-b9b9-68715940e7f8}</Project>
+      <Name>MAD.XamarinForms.Coordinates</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MAD.XamarinForms.Coordinates.TestApp\MAD.XamarinForms.Coordinates.TestApp.csproj">
       <Project>{12D60C1D-A1AA-45EF-9A1E-213A96B36DAC}</Project>
       <Name>MAD.XamarinForms.Coordinates.TestApp</Name>

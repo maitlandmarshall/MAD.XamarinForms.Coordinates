@@ -15,8 +15,19 @@
             </Style>
         </AbsoluteLayout.Resources>
 
-        <Button Clicked="Button_Clicked"
-                Text="Find toolbar coords" />
+        <StackLayout Orientation="Vertical"
+                     AbsoluteLayout.LayoutFlags="XProportional,YProportional"
+                     AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize">
+
+            <Button Clicked="Button_Clicked_1"
+                    Text="Test coords"/>
+            
+            <Button Clicked="Button_Clicked"
+                    Text="Find toolbar coords"/>
+
+        </StackLayout>
+        
+     
 
         <Label Text="Top left"
                AbsoluteLayout.LayoutBounds="0, 0, 100, 100"

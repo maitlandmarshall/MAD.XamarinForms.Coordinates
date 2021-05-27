@@ -18,26 +18,7 @@ namespace MAD.XamarinForms.Coordinates.TestApp
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-            this.Test();
-        }
-
-        private async void Test()
-        {
-            await Task.Delay(10);
-
-            var coordinateService = new CoordinateService();
-            
-
-            
-
-            var topLeftPoint = coordinateService.ConvertPointToView(this.tpLeft, Point.Zero, this.abs);
-            var topRightPoint = coordinateService.ConvertPointToView(this.tpRight, Point.Zero, this.abs);
-
-            var bottomRightPoint = coordinateService.ConvertPointToView(this.btmRight, Point.Zero, this.abs);
-            var bottomLeftPoint = coordinateService.ConvertPointToView(this.btmLeft, Point.Zero, this.abs);
-
-            Debug.WriteLine(bottomRightPoint);
+            base.OnAppearing();            
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -46,6 +27,19 @@ namespace MAD.XamarinForms.Coordinates.TestApp
             var coordinateService = new CoordinateService();
             var bounds = sizeService.GetSize(this.tbHi);
             var coords = coordinateService.ConvertPointToView(this.tbHi, Point.Zero, this);
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            var coordinateService = new CoordinateService();
+
+            var topLeftPoint = coordinateService.ConvertPointToView(this.tpLeft, Point.Zero, this.abs);
+            var topRightPoint = coordinateService.ConvertPointToView(this.tpRight, Point.Zero, this.abs);
+
+            var bottomRightPoint = coordinateService.ConvertPointToView(this.btmRight, Point.Zero, this.abs);
+            var bottomLeftPoint = coordinateService.ConvertPointToView(this.btmLeft, Point.Zero, this.abs);
+
+            Debug.WriteLine(bottomRightPoint);
         }
     }
 }
