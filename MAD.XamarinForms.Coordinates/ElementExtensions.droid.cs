@@ -16,7 +16,7 @@ namespace MAD.XamarinForms.Coordinates
             if (element is VisualElement visualElement)
             {
                 var renderer = Platform.GetRenderer(visualElement);
-                nativeView = renderer.View;
+                nativeView = renderer?.View;
             }
             else if (element is ToolbarItem toolbarItem)
             {
