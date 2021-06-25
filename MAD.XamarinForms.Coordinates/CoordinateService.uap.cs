@@ -14,6 +14,10 @@ namespace MAD.XamarinForms.Coordinates
             var receiverNative = receiver.GetNativeElement();
             var viewNative = view.GetNativeElement();
 
+            if (receiverNative is null
+                || viewNative is null)
+                return new Point(-1, -1);
+
             var transform = receiverNative.TransformToVisual(viewNative);
             var nativePoint = transform.TransformPoint(new Windows.Foundation.Point(point.X, point.Y));
 

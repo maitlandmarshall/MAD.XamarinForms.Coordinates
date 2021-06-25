@@ -13,6 +13,10 @@ namespace MAD.XamarinForms.Coordinates
             var receiverNative = receiver.GetNativeView();
             var viewNative = view.GetNativeView();
 
+            if (receiverNative is null
+                || viewNative is null)
+                return new Point(-1, -1);
+
             var nativePoint = receiverNative.ConvertPointToView(new CoreGraphics.CGPoint(point.X, point.Y), viewNative);
 
             return new Point(nativePoint.X, nativePoint.Y);
